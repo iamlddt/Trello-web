@@ -7,6 +7,7 @@ import LightModeIcon from '@mui/icons-material/LightMode'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
 import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness'
 import Box from '@mui/material/Box'
+import Container from '@mui/material/Container'
 
 function ModeSelect() {
   const { mode, setMode } = useColorScheme()
@@ -52,11 +53,42 @@ function ModeSelect() {
 
 function App() {
   return (
-    <>
-      <ModeSelect />
-      <hr />
-      <div></div>
-    </>
+    <Container disableGutters maxWidth={false} sx={{ height: '100vh' }}>
+      <Box
+        sx={{
+          width: '100%',
+          height: (theme) => theme.trelloCustom.appBarHeight,
+          display: 'flex',
+          alignItems: 'center',
+          backgroundColor: 'primary.light'
+        }}
+      >
+        <ModeSelect />
+      </Box>
+      <Box
+        sx={{
+          width: '100%',
+          height: (theme) => theme.trelloCustom.boardBarHeight,
+          display: 'flex',
+          alignItems: 'center',
+          backgroundColor: 'primary.dark'
+        }}
+      >
+        Board Bar
+      </Box>
+      <Box
+        sx={{
+          width: '100%',
+          height: (theme) =>
+            `calc(100vh - ${theme.trelloCustom.appBarHeight} - ${theme.trelloCustom.boardBarHeight})`,
+          display: 'flex',
+          alignItems: 'center',
+          backgroundColor: 'primary.main'
+        }}
+      >
+        Board Content
+      </Box>
+    </Container>
   )
 }
 
