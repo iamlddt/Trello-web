@@ -11,8 +11,9 @@ import Tooltip from '@mui/material/Tooltip'
 import Image from '~/assets/Khue.jpg'
 import Button from '@mui/material/Button'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
+import { capitalizeFirstLetter } from '~/utils/formatters'
 
-function BoardBar() {
+function BoardBar({ board }) {
   const Menu_Style = {
     color: 'white',
     bgcolor: 'transparent',
@@ -46,13 +47,13 @@ function BoardBar() {
         <Chip
           sx={Menu_Style}
           icon={<DashboardIcon />}
-          label="TrungDev"
+          label={board?.title}
           clickable
         />
         <Chip
           sx={Menu_Style}
           icon={<VpnLockIcon />}
-          label="Public/Private Workspace"
+          label={capitalizeFirstLetter(board?.type)}
           clickable
         />
         <Chip
