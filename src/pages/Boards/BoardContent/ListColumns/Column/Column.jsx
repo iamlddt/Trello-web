@@ -20,6 +20,9 @@ import ListCards from './ListCards/ListCards'
 
 import { mapOrder } from '~/utils/sorts'
 
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
+
 const Column = ({ column }) => {
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
@@ -32,8 +35,22 @@ const Column = ({ column }) => {
 
   const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, '_id')
 
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: column._id, data: { ...column } })
+  const dndKitColumnStyle = {
+    touchAction: 'none',
+    //Nếu sử dụng CSS.Transform như docs sẽ lỗi kiểu stretch
+    //https://github.com/clauderic/dnd-kit/issues/117
+    transform: CSS.Translate.toString(transform),
+    transition
+  }
+
   return (
     <Box
+      ref={setNodeRef}
+      style={dndKitColumnStyle}
+      {...attributes}
+      {...listeners}
       sx={{
         minWidth: '300px',
         maxWidth: '300px',
