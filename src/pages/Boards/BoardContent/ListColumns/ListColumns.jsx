@@ -11,7 +11,7 @@ import {
 const ListColumns = ({ columns }) => {
   return (
     <SortableContext
-      items={columns?.map((column) => column._id)}
+      items={columns?.map((c) => c._id)}
       strategy={horizontalListSortingStrategy}
     >
       <Box
